@@ -18,6 +18,7 @@
 | Default Root User | Default Root Password |
 | :--- | :--- |
 | root | Enjoyd@y |
+
 **Setting hosts file (Set on all nodes)**
 ```
 54.255.132.217 minio1
