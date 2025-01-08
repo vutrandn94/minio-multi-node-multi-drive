@@ -117,4 +117,4 @@ services:
 # docker-compose up -d
 ```
 
-- Access MinioUI: [http://<MINIO_SERVER_IP>:9001] or config Nginx / HAProxy to loadbalance for MinIO nodes
+**Access MinioUI: [http://<MINIO_SERVER_IP>:9001] or config Nginx / HAProxy to loadbalance for MinIO nodes
