@@ -5,9 +5,18 @@
 - Minimum: 4 server
 - Software: Docker, Docker Compose
 
-## Server info
+## Example Server Info
+
+| Hostname | IP Address |
+| :--- | :--- |
+| minio1 | 54.255.132.217 |
+| minio2 | 18.143.143.23 |
+| minio3 | 52.77.236.94 |
+| minio4 | 13.228.30.246 |
+
+## Deploy
+
 **Setting hosts file (Set on all nodes)**
-Example:
 ```
 54.255.132.217 minio1
 18.143.143.23 minio2
@@ -15,7 +24,6 @@ Example:
 13.228.30.246 minio4
 ```
 
-## Deploy
 **Prepare (Execute on all nodes)**
 ```
 # groupadd -g 1001 minio
