@@ -11,11 +11,13 @@
 | :--- | :--- |
 | minio1 | 54.255.132.217 |
 | minio2 | 18.143.143.23 |
-| minio3 | 52.77.236.94 |
+| minio3 | 52.77.2i36.94 |
 | minio4 | 13.228.30.246 |
 
 ## Deploy
-
+| Default Root User | Default Root Password |
+| :--- | :--- |
+| root | Enjoyd@y |
 **Setting hosts file (Set on all nodes)**
 ```
 54.255.132.217 minio1
@@ -44,7 +46,7 @@ services:
     restart: always
     environment:
       - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=xxxxx
+      - MINIO_ROOT_PASSWORD=Enjoyd@y
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
     ports:
@@ -63,7 +65,7 @@ services:
     restart: always
     environment:
       - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=xxxxx
+      - MINIO_ROOT_PASSWORD=Enjoyd@y
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
     ports:
@@ -82,7 +84,7 @@ services:
     restart: always
     environment:
       - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=xxxxx
+      - MINIO_ROOT_PASSWORD=Enjoyd@y
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
     ports:
@@ -101,7 +103,7 @@ services:
     restart: always
     environment:
       - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=xxxxx
+      - MINIO_ROOT_PASSWORD=Enjoyd@y
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
     ports:
