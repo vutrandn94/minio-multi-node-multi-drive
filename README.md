@@ -6,7 +6,7 @@
 - Software: Docker, Docker Compose
 
 ## Server info
-**Setting hosts file**
+**Setting hosts file (Set on all nodes)**
 ```
 54.255.132.217 minio1
 18.143.143.23 minio2
@@ -15,7 +15,7 @@
 ```
 
 ## Deploy
-**Prepare**
+**Prepare (Execute on all nodes)**
 ```
 # groupadd -g 1001 minio
 
@@ -27,7 +27,7 @@
 
 ```
 
-**docker-compose.yml in minio1**
+**docker-compose.yml in minio1 (Config in node "minio1")**
 ```
 services:
   minio1:
@@ -46,7 +46,7 @@ services:
       - /mnt/data-1:/bitnami/minio/data-1
 ```
 
-**docker-compose.yml in minio2**
+**docker-compose.yml in minio2 (Config in node "minio2")**
 ```
 services:
   minio2:
@@ -65,7 +65,7 @@ services:
       - /mnt/data-1:/bitnami/minio/data-1
 ```
 
-**docker-compose.yml in minio3**
+**docker-compose.yml in minio3 (Config in node "minio3")**
 ```
 services:
   minio3:
@@ -84,7 +84,7 @@ services:
       - /mnt/data-1:/bitnami/minio/data-1
 ```
 
-**docker-compose.yml in minio4**
+**docker-compose.yml in minio4 (Config in node "minio4")**
 ```
 services:
   minio4:
