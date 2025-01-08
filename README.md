@@ -103,7 +103,7 @@ services:
       - /mnt/data-1:/bitnami/minio/data-1
 ```
 
-**Deploy service**
+**Deploy service (Execute on all nodes)**
 ```
 # docker-compose up -d
 ```
