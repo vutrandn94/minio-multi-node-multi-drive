@@ -29,8 +29,6 @@
 
 **docker-compose.yml in minio1**
 ```
-version: '2'
-
 services:
   minio1:
     image: 'bitnami/minio:latest'
@@ -50,8 +48,6 @@ services:
 
 **docker-compose.yml in minio2**
 ```
-version: '2'
-
 services:
   minio2:
     image: 'bitnami/minio:latest'
@@ -71,8 +67,6 @@ services:
 
 **docker-compose.yml in minio3**
 ```
-version: '2'
-
 services:
   minio3:
     image: 'bitnami/minio:latest'
@@ -92,8 +86,6 @@ services:
 
 **docker-compose.yml in minio4**
 ```
-version: '2'
-
 services:
   minio4:
     image: 'bitnami/minio:latest'
