@@ -15,6 +15,7 @@
 | minio4 | 13.228.30.246 |
 
 ## Deploy
+**Defaul minio admin user & password (Change if necessary)** 
 | Default Root User | Default Root Password |
 | :--- | :--- |
 | root | Enjoyd@y |
