@@ -7,6 +7,7 @@
 
 ## Server info
 **Setting hosts file (Set on all nodes)**
+Example:
 ```
 54.255.132.217 minio1
 18.143.143.23 minio2
