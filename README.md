@@ -30,7 +30,8 @@ Deploy MinIO: Multi-Node Multi-Drive
 **Default docker volume mount path**
 | Default volume mount path |
 | :--- |
-| /mnt/data-0 | 
+| /mnt/data-0 |
+| /mnt/data-1 |
 
 **Default MinIO docker image**
 | Default MinIO docker image |
