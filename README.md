@@ -1,119 +1,165 @@
-# Deploy MinIO: Multi-Node Multi-Drive
+# MinIO multi-node single-drive
+Deploy MinIO: Multi-Node Single-Drive
 
-## Require
+## Requirement
 - Format disk XFS for high performance
-- Minimum: 4 server
-- Software: Docker, Docker Compose
+- Minimum: 4 nodes (4 servers) <=> Default server failures tolerance: 2 server failures in total (If reached 2 server failures, MinIO can switch to read-only mode or stop working to ensure data security)
+- Deployment environment: Docker
+- Deployment tools: Docker Compose
 
-## Example Server Info
+## Information about the servers deploying the lab
 
 | Hostname | IP Address |
 | :--- | :--- |
-| minio1 | 54.255.132.217 |
-| minio2 | 18.143.143.23 |
-| minio3 | 52.77.2i36.94 |
-| minio4 | 13.228.30.246 |
+| minio01 | 172.31.40.231 |
+| minio02 | 172.31.44.99 |
+| minio03 | 172.31.36.91 |
+| minio04 | 172.31.40.139 |
 
 ## Deploy
-**Defaul minio admin user & password (Change if necessary)** 
+**Default minio admin user & password (Change if necessary)**
 | Default Root User | Default Root Password |
 | :--- | :--- |
 | root | Enjoyd@y |
 
+**Default container Timezone (Modify to appropriate timezone)**
+| Default container Timezone |
+| :--- |
+| Asia/Ho_Chi_Minh |
+
+**Default docker volume mount path**
+| Default volume mount path |
+| :--- |
+| /mnt/data-0 | 
+
+**Default MinIO docker image**
+| Default MinIO docker image |
+| :--- |
+| quay.io/minio/minio:RELEASE.2025-01-20T14-49-07Z |
+
 **Setting hosts file (Set on all nodes)**
 ```
-54.255.132.217 minio1
-18.143.143.23 minio2
-52.77.236.94 minio3
-13.228.30.246 minio4
-```
-
-**Prepare (Execute on all nodes)**
-```
-# groupadd -g 1001 minio
-
-# useradd -m -u 1001 -g 1001 -s /usr/sbin/nologin minio
-
-# mkdir -p /mnt/data-{0..1}
-
-# chown minio:minio /tmp/data-{0..1}
-
+## MINIO
+172.31.40.231 minio01 
+172.31.44.99 minio02 
+172.31.36.91 minio03 
+172.31.40.139 minio04 
 ```
 
 **docker-compose.yml in minio1 (Config in node "minio1")**
 ```
 services:
-  minio1:
-    image: 'bitnami/minio:latest'
+  minio01:
+    image: 'quay.io/minio/minio:RELEASE.2025-01-20T14-49-07Z'
     restart: always
     environment:
-      - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=Enjoyd@y
-      - MINIO_DISTRIBUTED_MODE_ENABLED=yes
-      - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
+      MINIO_ROOT_USER: "root"
+      MINIO_ROOT_PASSWORD: "Enjoyd@y"
+      TZ: "Asia/Ho_Chi_Minh"
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
-      - /mnt/data-0:/bitnami/minio/data-0
-      - /mnt/data-1:/bitnami/minio/data-1
+      - /mnt/data-0:/mnt/data-0
+    networks:
+      - minio-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
+networks:
+  minio-net:
+    driver: bridge
 ```
 
 **docker-compose.yml in minio2 (Config in node "minio2")**
 ```
 services:
-  minio2:
-    image: 'bitnami/minio:latest'
+  minio02:
+    image: 'quay.io/minio/minio:RELEASE.2025-01-20T14-49-07Z'
     restart: always
     environment:
-      - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=Enjoyd@y
-      - MINIO_DISTRIBUTED_MODE_ENABLED=yes
-      - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
+      MINIO_ROOT_USER: "root"
+      MINIO_ROOT_PASSWORD: "Enjoyd@y"
+      TZ: "Asia/Ho_Chi_Minh"
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
-      - /mnt/data-0:/bitnami/minio/data-0
-      - /mnt/data-1:/bitnami/minio/data-1
+      - /mnt/data-0:/mnt/data-0
+    networks:
+      - minio-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
+networks:
+  minio-net:
+    driver: bridge
 ```
 
 **docker-compose.yml in minio3 (Config in node "minio3")**
 ```
 services:
-  minio3:
-    image: 'bitnami/minio:latest'
+  minio03:
+    image: 'quay.io/minio/minio:RELEASE.2025-01-20T14-49-07Z'
     restart: always
     environment:
-      - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=Enjoyd@y
-      - MINIO_DISTRIBUTED_MODE_ENABLED=yes
-      - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
+      MINIO_ROOT_USER: "root"
+      MINIO_ROOT_PASSWORD: "Enjoyd@y"
+      TZ: "Asia/Ho_Chi_Minh"
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
-      - /mnt/data-0:/bitnami/minio/data-0
-      - /mnt/data-1:/bitnami/minio/data-1
+      - /mnt/data-0:/mnt/data-0
+    networks:
+      - minio-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
+networks:
+  minio-net:
+    driver: bridge
 ```
 
 **docker-compose.yml in minio4 (Config in node "minio4")**
 ```
 services:
-  minio4:
-    image: 'bitnami/minio:latest'
+  minio04:
+    image: 'quay.io/minio/minio:RELEASE.2025-01-20T14-49-07Z'
     restart: always
     environment:
-      - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=Enjoyd@y
-      - MINIO_DISTRIBUTED_MODE_ENABLED=yes
-      - MINIO_DISTRIBUTED_NODES=minio{1...4}/bitnami/minio/data-{0...1}
+      MINIO_ROOT_USER: "root"
+      MINIO_ROOT_PASSWORD: "Enjoyd@y"
+      TZ: "Asia/Ho_Chi_Minh"
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
-      - /mnt/data-0:/bitnami/minio/data-0
-      - /mnt/data-1:/bitnami/minio/data-1
+      - /mnt/data-0:/mnt/data-0
+    networks:
+      - minio-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
+networks:
+  minio-net:
+    driver: bridge
 ```
 
 **Deploy service (Execute on all nodes)**
