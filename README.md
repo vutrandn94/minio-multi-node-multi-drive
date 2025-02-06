@@ -1,5 +1,5 @@
-# MinIO multi-node single-drive
-Deploy MinIO: Multi-Node Single-Drive
+# MinIO multi-node multi-drive
+Deploy MinIO: Multi-Node Multi-Drive
 
 ## Requirement
 - Format disk XFS for high performance
@@ -56,12 +56,13 @@ services:
       MINIO_ROOT_USER: "root"
       MINIO_ROOT_PASSWORD: "Enjoyd@y"
       TZ: "Asia/Ho_Chi_Minh"
-    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-{0...1}
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
       - /mnt/data-0:/mnt/data-0
+      - /mnt/data-1:/mnt/data-1
     networks:
       - minio-net
     healthcheck:
@@ -85,12 +86,13 @@ services:
       MINIO_ROOT_USER: "root"
       MINIO_ROOT_PASSWORD: "Enjoyd@y"
       TZ: "Asia/Ho_Chi_Minh"
-    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-{0...1}
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
       - /mnt/data-0:/mnt/data-0
+      - /mnt/data-1:/mnt/data-1
     networks:
       - minio-net
     healthcheck:
@@ -114,12 +116,13 @@ services:
       MINIO_ROOT_USER: "root"
       MINIO_ROOT_PASSWORD: "Enjoyd@y"
       TZ: "Asia/Ho_Chi_Minh"
-    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-{0...1}
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
       - /mnt/data-0:/mnt/data-0
+      - /mnt/data-1:/mnt/data-1
     networks:
       - minio-net
     healthcheck:
@@ -143,12 +146,13 @@ services:
       MINIO_ROOT_USER: "root"
       MINIO_ROOT_PASSWORD: "Enjoyd@y"
       TZ: "Asia/Ho_Chi_Minh"
-    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-0
+    command: server --console-address ":9001" http://minio0{1...4}/mnt/data-{0...1}
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
       - /mnt/data-0:/mnt/data-0
+      - /mnt/data-1:/mnt/data-1
     networks:
       - minio-net
     healthcheck:
