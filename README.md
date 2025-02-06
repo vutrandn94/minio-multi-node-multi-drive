@@ -3,7 +3,7 @@ Deploy MinIO: Multi-Node Multi-Drive
 
 ## Requirement
 - Format disk XFS for high performance
-- Minimum: 4 nodes (4 servers) <=> Default server failures tolerance: 2 server failures in total (If reached 2 server failures, MinIO can switch to read-only mode or stop working to ensure data security)
+- Minimum: 4 nodes (4 servers), 8 drive (2 drive per server) <=> Default server failures tolerance: 2 server failures in total (If reached 2 server failures, MinIO can switch to read-only mode or stop working to ensure data security)
 - Deployment environment: Docker
 - Deployment tools: Docker Compose
 
